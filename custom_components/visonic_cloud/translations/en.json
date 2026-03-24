@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Visonic Cloud Login",
+        "description": "Enter your Visonic Cloud account credentials.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "select_panel": {
+        "title": "Select Panel",
+        "description": "Multiple panels found. Please select the panel to configure.",
+        "data": {
+          "panel_serial": "Panel"
+        }
+      },
+      "panel_code": {
+        "title": "Panel Code",
+        "description": "Enter the user code (PIN) for the selected panel.",
+        "data": {
+          "user_code": "User Code"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid email or password.",
+      "invalid_code": "Invalid user code for the panel.",
+      "cannot_connect": "Unable to connect to Visonic Cloud. Please try again later.",
+      "no_panels": "No panels found for this account.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This panel is already configured."
+    }
+  }
+}

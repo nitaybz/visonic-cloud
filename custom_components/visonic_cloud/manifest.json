@@ -1,0 +1,10 @@
+{
+  "domain": "visonic_cloud",
+  "name": "Visonic Cloud",
+  "codeowners": ["@nitaybz"],
+  "config_flow": true,
+  "documentation": "https://github.com/nitaybz/visonic-cloud",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/nitaybz/visonic-cloud/issues",
+  "version": "1.0.0"
+}

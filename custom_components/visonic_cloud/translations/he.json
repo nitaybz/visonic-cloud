@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "התחברות Visonic Cloud",
+        "description": "הזן את פרטי חשבון Visonic Cloud שלך.",
+        "data": {
+          "email": "אימייל",
+          "password": "סיסמה"
+        }
+      },
+      "select_panel": {
+        "title": "בחירת מערכת",
+        "description": "נמצאו מספר מערכות. בחר את המערכת להגדרה.",
+        "data": {
+          "panel_serial": "מערכת"
+        }
+      },
+      "panel_code": {
+        "title": "קוד מערכת",
+        "description": "הזן את קוד המשתמש (PIN) של המערכת הנבחרת.",
+        "data": {
+          "user_code": "קוד משתמש"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "אימייל או סיסמה שגויים.",
+      "invalid_code": "קוד משתמש שגוי למערכת.",
+      "cannot_connect": "לא ניתן להתחבר ל-Visonic Cloud. נסה שוב מאוחר יותר.",
+      "no_panels": "לא נמצאו מערכות בחשבון זה.",
+      "unknown": "אירעה שגיאה בלתי צפויה."
+    },
+    "abort": {
+      "already_configured": "מערכת זו כבר מוגדרת."
+    }
+  }
+}
