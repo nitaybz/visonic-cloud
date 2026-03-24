@@ -115,14 +115,17 @@ class VisonicZoneBinarySensor(
         if device is None:
             return None
 
-        # Check device-level warnings
+        # Check device-level warnings (ignore in-memory)
         warnings = device.get("warnings", [])
-        if warnings:
-            return True
+        for warning in (warnings or []):
+            if warning.get("type") != "ALARM_IN_MEMORY":
+                return True
 
-        # Check alarms for this zone
+        # Check active alarms for this zone (ignore in-memory)
         alarms = self.coordinator.data.get("alarms", [])
         for alarm in alarms:
+            if alarm.get("alarm_type") == "ALARM_IN_MEMORY":
+                continue
             if alarm.get("zone") == self._device_number:
                 return True
 

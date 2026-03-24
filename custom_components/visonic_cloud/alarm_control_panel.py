@@ -126,9 +126,11 @@ class VisonicAlarmControlPanel(
     @property
     def alarm_state(self) -> AlarmControlPanelState | None:
         """Return the state of the alarm."""
-        # Check for active alarms first
+        # Check for active alarms (ignore ALARM_IN_MEMORY which are historical)
         alarms = self.coordinator.data.get("alarms", [])
         for alarm in alarms:
+            if alarm.get("alarm_type") == "ALARM_IN_MEMORY":
+                continue
             alarm_partitions = alarm.get("partitions", [])
             if self._partition_id == -1 or self._partition_id in alarm_partitions:
                 return AlarmControlPanelState.TRIGGERED
