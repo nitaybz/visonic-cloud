@@ -11,7 +11,9 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import UnitOfIlluminance, UnitOfTemperature
+from homeassistant.const import UnitOfTemperature
+
+LIGHT_LUX = "lx"
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -156,7 +158,7 @@ class VisonicBrightnessSensor(
     _attr_has_entity_name = True
     _attr_device_class = SensorDeviceClass.ILLUMINANCE
     _attr_state_class = SensorStateClass.MEASUREMENT
-    _attr_native_unit_of_measurement = UnitOfIlluminance.LUX
+    _attr_native_unit_of_measurement = LIGHT_LUX
 
     def __init__(
         self,

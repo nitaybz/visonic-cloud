@@ -3,8 +3,11 @@
   "name": "Visonic Cloud",
   "codeowners": ["@nitaybz"],
   "config_flow": true,
+  "dependencies": [],
   "documentation": "https://github.com/nitaybz/visonic-cloud",
+  "integration_type": "hub",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/nitaybz/visonic-cloud/issues",
+  "requirements": [],
   "version": "1.0.0"
 }
