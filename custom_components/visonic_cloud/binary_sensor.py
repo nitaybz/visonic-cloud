@@ -90,7 +90,7 @@ class VisonicZoneBinarySensor(
         device_name = location.get("name", device.get("name", f"Zone {self._device_number}"))
 
         self._attr_unique_id = f"{panel_serial}_{self._device_id}"
-        self._attr_name = device_name
+        self._attr_name = None  # Use device name (has_entity_name = True)
 
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{panel_serial}_{self._device_id}")},
