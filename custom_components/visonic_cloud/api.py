@@ -218,7 +218,7 @@ class VisonicCloudApi:
         """Arm the panel in away mode."""
         return await self._request(
             "POST",
-            "panel/arm",
+            "set_state",
             headers=self._session_headers(),
             json_data={"state": "AWAY", "partition": partition},
         )
@@ -227,7 +227,7 @@ class VisonicCloudApi:
         """Arm the panel in home mode."""
         return await self._request(
             "POST",
-            "panel/arm",
+            "set_state",
             headers=self._session_headers(),
             json_data={"state": "HOME", "partition": partition},
         )
@@ -236,7 +236,7 @@ class VisonicCloudApi:
         """Disarm the panel."""
         return await self._request(
             "POST",
-            "panel/disarm",
+            "set_state",
             headers=self._session_headers(),
-            json_data={"partition": partition},
+            json_data={"state": "DISARM", "partition": partition},
         )
