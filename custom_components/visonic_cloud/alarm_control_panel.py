@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -115,6 +116,8 @@ class VisonicAlarmControlPanel(
             serial_number=panel_serial,
         )
 
+        self._attr_alarm_state = self._get_alarm_state_from_data()
+
     def _get_panel_model(self) -> str | None:
         """Get panel model from devices list."""
         devices = self.coordinator.data.get("devices", [])
@@ -123,9 +126,8 @@ class VisonicAlarmControlPanel(
                 return device.get("subtype")
         return None
 
-    @property
-    def alarm_state(self) -> AlarmControlPanelState | None:
-        """Return the state of the alarm."""
+    def _get_alarm_state_from_data(self) -> AlarmControlPanelState | None:
+        """Determine alarm state from coordinator data."""
         # Check for active alarms (ignore ALARM_IN_MEMORY which are historical)
         alarms = self.coordinator.data.get("alarms", [])
         for alarm in alarms:
@@ -145,6 +147,12 @@ class VisonicAlarmControlPanel(
                 return PARTITION_STATE_MAP.get(state, AlarmControlPanelState.DISARMED)
 
         return None
+
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Handle updated data from the coordinator."""
+        self._attr_alarm_state = self._get_alarm_state_from_data()
+        super()._handle_coordinator_update()
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
@@ -177,14 +185,23 @@ class VisonicAlarmControlPanel(
     async def async_alarm_disarm(self, code: str | None = None) -> None:
         """Send disarm command."""
         await self.coordinator.api.disarm(self._partition_id)
+        self._attr_alarm_state = AlarmControlPanelState.DISARMED
+        self.async_write_ha_state()
+        await asyncio.sleep(3)
         await self.coordinator.async_request_refresh()
 
     async def async_alarm_arm_home(self, code: str | None = None) -> None:
         """Send arm home command."""
         await self.coordinator.api.arm_home(self._partition_id)
+        self._attr_alarm_state = AlarmControlPanelState.ARMING
+        self.async_write_ha_state()
+        await asyncio.sleep(3)
         await self.coordinator.async_request_refresh()
 
     async def async_alarm_arm_away(self, code: str | None = None) -> None:
         """Send arm away command."""
         await self.coordinator.api.arm_away(self._partition_id)
+        self._attr_alarm_state = AlarmControlPanelState.ARMING
+        self.async_write_ha_state()
+        await asyncio.sleep(3)
         await self.coordinator.async_request_refresh()
